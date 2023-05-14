@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="facility_view_form" model="ir.ui.view">
+            <field name="name">facility_view_form</field>
+            <field name="model">facility.rider</field>
+            <field name="arch" type="xml">
+                <form string="facility_form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="facility_type"/>
+
+                        </group>
+                        <notebook>
+                            <page>
+                                <field name="patients_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="facility_view_tree" model="ir.ui.view">
+            <field name="name">facility_view_tree</field>
+            <field name="model">facility.rider</field>
+            <field name="arch" type="xml">
+                <tree string="facility_tree">
+                    <field name="name"/>
+                    <field name="facility_type"/>
+                </tree>
+            </field>
+        </record>
+        <record id="location_view_form" model="ir.ui.view">
+            <field name="name">location_view_form</field>
+            <field name="model">sample.location</field>
+            <field name="arch" type="xml">
+                <form string="location_form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="epid_no"/>
+                                <field name="zone"/>
+                                <field name="state_id"/>
+                                <field name="lga"/>
+                                <field name="status"/>
+                            </group>
+                            <group>
+                                <field name="latitude"/>
+                                <field name="longitude"/>
+                                <field name="nearest_landmark"/>
+                                <field name="type_location"/>
+                            </group>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="location_view_tree" model="ir.ui.view">
+            <field name="name">location_view_tree</field>
+            <field name="model">sample.location</field>
+            <field name="arch" type="xml">
+                <tree string="location_tree">
+                    <field name="zone"/>
+                    <field name="state_id"/>
+                    <field name="lga"/>
+                    <field name="name"/>
+                    <field name="status"/>
+                    <field name="epid_no"/>
+                    <field name="longitude"/>
+                    <field name="latitude"/>
+                </tree>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

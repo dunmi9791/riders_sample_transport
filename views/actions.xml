@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="specimen_action" model="ir.actions.act_window">
+            <field name="name">Specimen Transport</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sample.sample</field>
+            <field name="view_mode">tree,form,pivot,graph</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+        <record id="facilities_action" model="ir.actions.act_window">
+            <field name="name">Facilities Transport</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">facility.rider</field>
+            <field name="view_mode">tree,form,pivot,graph</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+        <record id="loggers_action" model="ir.actions.act_window">
+            <field name="name">temperature loggers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">temperature.logger</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+        <record id="temperature_log_action" model="ir.actions.act_window">
+            <field name="name">temperature logs</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">temperature.log</field>
+            <field name="view_mode">tree,form,pivot,graph</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+        <record id="patients_action" model="ir.actions.act_window">
+            <field name="name">patients</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">patient.rider</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+        <record id="facilities_action" model="ir.actions.act_window">
+            <field name="name">facilities</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">facility.rider</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+        <record id="locations_action" model="ir.actions.act_window">
+            <field name="name">locations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sample.location</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with this object will be OK -->
+              </p>
+            </field>
+        </record>
+
+
+<!--        <record id="test_type_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Test Type</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">test.type</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="help" type="html">-->
+<!--              <p class="oe_view_nocontent_create">-->
+<!--                &lt;!&ndash; Add Text Here &ndash;&gt;-->
+<!--              </p><p>-->
+<!--                &lt;!&ndash; More details about what a user can do with this object will be OK &ndash;&gt;-->
+<!--              </p>-->
+<!--            </field>-->
+
+<!--        </record>-->
+<!--        <record id="projects_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Projects</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">project.sample</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="help" type="html">-->
+<!--              <p class="oe_view_nocontent_create">-->
+<!--                &lt;!&ndash; Add Text Here &ndash;&gt;-->
+<!--              </p><p>-->
+<!--                &lt;!&ndash; More details about what a user can do with this object will be OK &ndash;&gt;-->
+<!--              </p>-->
+<!--            </field>-->
+
+<!--        </record>-->
+<!--        <record id="result_action" model="ir.actions.act_window">-->
+<!--                <field name="name">Result Transport</field>-->
+<!--                <field name="type">ir.actions.act_window</field>-->
+<!--                <field name="res_model">result.transport</field>-->
+<!--                <field name="view_mode">tree,form,pivot,graph</field>-->
+<!--                <field name="help" type="html">-->
+<!--                        <p class="oe_view_nocontent_create">-->
+<!--                        </p><p>-->
+
+<!--    </p>-->
+<!--                </field>-->
+<!--        </record>-->
+        <record id="sample_transport_dashboard" model="ir.actions.act_window">
+        <field name="name">Dashboard</field>
+        <field name="res_model">board.board</field>
+        <field name="view_mode">form</field>
+        <field name="usage">menu</field>
+<!--        <field name="view_id" ref="dashboard_form_view"/>-->
+    </record>
+
+
+
+    </data>
+</odoo>

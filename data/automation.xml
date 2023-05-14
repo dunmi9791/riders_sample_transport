@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    <record id="increment_sample_sequence" model="ir.sequence">
+    <field name="name">Sample Incrementation</field>
+    <field name="code">increment_sample</field>
+    <field name="prefix">Sample/%(range_year)s/</field>
+    <field name="padding">5</field>
+    <field name="company_id" eval="False"/>
+</record>
+        <record id="increment_patient_sequence" model="ir.sequence">
+    <field name="name">Patient Incrementation</field>
+    <field name="code">increment_patient</field>
+    <field name="prefix">Patient/%(range_year)s/</field>
+    <field name="padding">5</field>
+    <field name="company_id" eval="False"/>
+</record>
+
+
+    </data>
+
+
+</odoo>

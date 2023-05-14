@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem name="Riders Sample Transport" id="riders_sample_transport_root_menu" web_icon="riders_sample_transport,static/src/img/riders_app_logo.png"/>
+        <menuitem name="Samples" id="sampletransport_transport_menu" parent="riders_sample_transport_root_menu"
+              sequence="2" action="specimen_action" />
+        <menuitem name="Settings" id="settings_menu" parent="riders_sample_transport_root_menu" sequence="8"/>
+<!--        <menuitem name="Test Types" id="test_types_menu" parent="settings_menu" sequence="3" action="test_type_action"/>-->
+        <!-- This Menu Item Must have a parent -->
+        <menuitem id="facility_menu" name="Facilities" parent="riders_sample_transport_root_menu" sequence="6"/>
+        <menuitem name="facilities" id="facilities_menu" parent="facility_menu"
+              sequence="2" action="facilities_action" />
+        <menuitem name="locations" id="locations_menu" parent="facility_menu"
+              sequence="3" action="locations_action" />
+        <menuitem name="patients" id="patients_menu" parent="facility_menu"
+              sequence="4" action="patients_action" />
+        <!-- This Menu Item Must have a parent -->
+<!--        <menuitem id="specimen_transport_menu" name="Specimen Transport" parent="sample_transport_root_menu" sequence="4" action="specimen_action"/>-->
+
+        <!-- This Menu Item Must have a parent -->
+<!--        <menuitem id="facilities_menu" name="Facilities" parent="facility_menu" sequence="5" action="facilities_action"/>-->
+<!--        <menuitem id="facility_staff_menu" name="Facility Staffs" parent="facility_menu" sequence="7"/>-->
+<!--        <menuitem id="facility_results_menu" name="Facility Results" parent="facility_menu" sequence="6" action="pending_result_action"/>-->
+        <menuitem name="Temperature Loggers" id="temperature_loggers_menu" parent="riders_sample_transport_root_menu"
+              sequence="3"  />
+        <menuitem name="loggers" id="loggers_menu" parent="temperature_loggers_menu"
+              sequence="2" action="loggers_action" />
+        <menuitem name="temperature logs" id="temperature_log_menu" parent="temperature_loggers_menu"
+              sequence="3" action="temperature_log_action" />
+        <menuitem name="Dashboard" parent="riders_sample_transport_root_menu" action="ks_dashboard_ninja.board_dashboard_action_window" sequence="1"  id="menu_dashboard"/>
+
+
+
+    </data>
+</odoo>

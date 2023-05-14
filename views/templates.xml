@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+        <report
+    id="sample_report"
+    string="Sample Report"
+    model="sample.sample"
+    report_type="qweb-pdf"
+    name="sample.report"
+    file="sample.report"
+    print_report_name="True"
+    attachment_use="True"
+    attachment="(object.name or 'Sample') + '.pdf'"
+    menu="False"
+/>
+
+<template id="sample_report">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="report.external_layout">
+                <div class="page">
+                    <div class="section">
+                        <h1>Sample Report: <t t-esc="doc.name"/></h1>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>Facility</th>
+                                    <th>Third-Party Agent</th>
+                                    <th>Status</th>
+                                    <th>Pickup Date</th>
+                                    <th>Delivery Date</th>
+                                    <th>Turnaround Time (hours)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><t t-esc="doc.patient_id.name"/></td>
+                                    <td><t t-esc="doc.facility_id.name"/></td>
+                                    <td><t t-esc="doc.third_party_agent_id.name"/></td>
+                                    <td><t t-esc="doc.status"/></td>
+                                    <td><t t-esc="doc.pickup_date"/></td>
+                                    <td><t t-esc="doc.delivery_date"/></td>
+                                    <td><t t-esc="doc.turnaround_time"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+<!--<record id="sample_dashboard" model="ir.ui.view">-->
+<!--    <field name="name">sample.dashboard</field>-->
+<!--    <field name="model">sample.sample</field>-->
+<!--    <field name="arch" type="xml">-->
+<!--        <dashboard>-->
+<!--            <page string="Sample Dashboard">-->
+<!--                <group>-->
+<!--                    <field name="status" widget="pie"/>-->
+<!--                </group>-->
+<!--                <group>-->
+<!--                    <field name="turnaround_time" widget="float_time" string="Average Turnaround Time (hours)"/>-->
+<!--                </group>-->
+<!--            </page>-->
+<!--        </dashboard>-->
+<!--    </field>-->
+<!--</record>-->
+
+    </data>
+</odoo>
