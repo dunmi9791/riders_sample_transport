@@ -13,43 +13,43 @@
     menu="False"
 />
 
-<template id="sample_report">
-    <t t-call="report.html_container">
-        <t t-foreach="docs" t-as="doc">
-            <t t-call="report.external_layout">
-                <div class="page">
-                    <div class="section">
-                        <h1>Sample Report: <t t-esc="doc.name"/></h1>
-                        <table class="table table-condensed">
-                            <thead>
-                                <tr>
-                                    <th>Patient</th>
-                                    <th>Facility</th>
-                                    <th>Third-Party Agent</th>
-                                    <th>Status</th>
-                                    <th>Pickup Date</th>
-                                    <th>Delivery Date</th>
-                                    <th>Turnaround Time (hours)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><t t-esc="doc.patient_id.name"/></td>
-                                    <td><t t-esc="doc.facility_id.name"/></td>
-                                    <td><t t-esc="doc.third_party_agent_id.name"/></td>
-                                    <td><t t-esc="doc.status"/></td>
-                                    <td><t t-esc="doc.pickup_date"/></td>
-                                    <td><t t-esc="doc.delivery_date"/></td>
-                                    <td><t t-esc="doc.turnaround_time"/></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </t>
-        </t>
-    </t>
-</template>
+<!--<template id="sample_report">-->
+<!--    <t t-call="report.html_container">-->
+<!--        <t t-foreach="docs" t-as="doc">-->
+<!--            <t t-call="report.external_layout">-->
+<!--                <div class="page">-->
+<!--                    <div class="section">-->
+<!--                        <h1>Sample Report: <t t-esc="doc.name"/></h1>-->
+<!--                        <table class="table table-condensed">-->
+<!--                            <thead>-->
+<!--                                <tr>-->
+<!--                                    <th>Patient</th>-->
+<!--                                    <th>Facility</th>-->
+<!--                                    <th>Third-Party Agent</th>-->
+<!--                                    <th>Status</th>-->
+<!--                                    <th>Pickup Date</th>-->
+<!--                                    <th>Delivery Date</th>-->
+<!--                                    <th>Turnaround Time (hours)</th>-->
+<!--                                </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                                <tr>-->
+<!--                                    <td><t t-esc="doc.patient_id.name"/></td>-->
+<!--                                    <td><t t-esc="doc.facility_id.name"/></td>-->
+<!--                                    <td><t t-esc="doc.third_party_agent_id.name"/></td>-->
+<!--                                    <td><t t-esc="doc.status"/></td>-->
+<!--                                    <td><t t-esc="doc.pickup_date"/></td>-->
+<!--                                    <td><t t-esc="doc.delivery_date"/></td>-->
+<!--                                    <td><t t-esc="doc.turnaround_time"/></td>-->
+<!--                                </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </t>-->
+<!--        </t>-->
+<!--    </t>-->
+<!--</template>-->
 
 <!--<record id="sample_dashboard" model="ir.ui.view">-->
 <!--    <field name="name">sample.dashboard</field>-->
