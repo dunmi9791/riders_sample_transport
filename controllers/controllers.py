@@ -6,7 +6,7 @@ from odoo.http import request
 
 class MarkPickup(http.Controller):
 
-    @http.route('/pickup/<int:record_id>', type='http', auth='user')
+    @http.route('/pickup/<int:record_id>', type='json', auth='user')
     def pick_up(self, record_id, **kwargs):
         # Fetch the record
         record = request.env['sample.sample'].sudo().browse(record_id)
@@ -20,7 +20,7 @@ class MarkPickup(http.Controller):
 
 class MarkDelivered(http.Controller):
 
-    @http.route('/deliver/<int:record_id>', type='http', auth='user')
+    @http.route('/deliver/<int:record_id>', type='json', auth='user')
     def deliver(self, record_id, **kwargs):
         # Fetch the record
         record = request.env['sample.sample'].sudo().browse(record_id)
@@ -34,14 +34,16 @@ class MarkDelivered(http.Controller):
 
 class GetSamples(http.Controller):
 
-    @http.route('/assigned_samples', type='http', auth='user')
+    @http.route('/assigned_samples', type='json', auth='user')
     def get_my_samples(self, **kwargs):
         # Get the current user
         user_id = request.uid
+        user = request.env['res.users'].browse(user_id)
+        partner = user.partner_id
 
         # Get the records linked to the current user and in the specified states
         records = request.env['sample.sample'].sudo().search([
-            ('third_party_agent_id', '=', user_id),
+            ('third_party_agent_id', '=', partner.id),
         ])
 
         # Format the results (just an example, adapt as needed)
@@ -52,7 +54,7 @@ class GetSamples(http.Controller):
 
 
 class MobileApiTestTypes(http.Controller):
-    @http.route('/loggers/', website=True, type='http', auth='public')
+    @http.route('/loggers/', website=True, type='json', auth='public')
     def loggers(self):
         # return "List of all Samples"
         loggers_list = []
