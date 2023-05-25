@@ -2,7 +2,6 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_riders_sample_transport,riders_sample_transport.riders_sample_transport,model_sample_sample,,1,1,1,0
 access_riders_sample_patient,riders_sample_transport.riders_sample_patient,model_patient_rider,,1,1,1,0
 access_riders_sample_facility,riders_sample_transport.riders_sample_facility,model_facility_rider,,1,1,1,0
-access_riders_sample_test_type,riders_sample_transport.riders_sample_test_type,model_test_type,,1,1,1,0
 access_riders_sample_patient_sequence,riders_sample_transport.riders_sample_patient_sequence,model_facility_patient_sequence,,1,1,1,0
 access_riders_sample_temperature_logger,riders_sample_transport.riders_sample_temperature_logger,model_temperature_logger,,1,1,1,0
 access_riders_sample_temperature_log,riders_sample_transport.riders_sample_temperature_log,model_temperature_log,,1,1,1,0
