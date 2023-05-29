@@ -33,7 +33,6 @@ class MarkDelivered(http.Controller):
 
 
 class GetSamples(http.Controller):
-
     @http.route('/assigned_samples', type='json', auth='user')
     def get_my_samples(self, **kwargs):
         # Get the current user
@@ -46,8 +45,8 @@ class GetSamples(http.Controller):
             ('third_party_agent_id', '=', partner.id),
         ])
 
-        # Format the results (just an example, adapt as needed)
-        results = ', '.join('ID: %s, State: %s, No: %s' % (record.id, record.state, record.sample_no) for record in records)
+        # Format the results into list of dictionaries
+        results = [{'ID': record.id, 'State': record.state, 'No': record.sample_no} for record in records]
 
         # Return the results
         return results
