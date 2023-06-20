@@ -15,7 +15,7 @@
                         <field name="sample_no"/>
                         <field name="barcode"/>
                         <field name="test_type"/>
-                        <field name="patient_id" attrs="{'required': [('test_type', '=', 'afp')]}"/>
+                        <field name="case_number"/>
                         <field name="location" />
                         <field name="facility_sending_id"/>
                         <field name="specimen_type"/>

@@ -17,6 +17,7 @@ class Sample(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     patient_id = fields.Many2one('patient.rider', string='Patient', required=False, track_visibility='onchange')
+    case_number = fields.Char(string='Case Number/Patient', required=False, track_visibility='onchange')
     facility_sending_id = fields.Many2one('facility.rider', string='Sending Facility', required=False, track_visibility='onchange')
     facility_receiving_id = fields.Many2one('facility.rider', string='Destination Facility', required=True, track_visibility='onchange')
     third_party_agent_id = fields.Many2one('res.partner', string='Assigned Riders', track_visibility='onchange', required=True)
