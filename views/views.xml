@@ -71,6 +71,7 @@
             <field name="state"/>
             <field name="facility_receiving_id"/>
             <field name="result_status"/>
+            <field name="company_id"/>
         </tree>
     </field>
 </record>
