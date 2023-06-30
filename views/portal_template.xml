@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<!--    <template id="subjects">-->
+<!--        <title>Academy</title>-->
+<!--        <ul>-->
+<!--            <t t-foreach="subjects" t-as="subject">-->
+<!--                <li>-->
+<!--                    <t t-esc="subject"/>-->
+<!--                </li>-->
+<!--            </t>-->
+<!--        </ul>-->
+<!--    </template>-->
+
+    <template id="samples">
+        <t t-call="website.layout">
+            <title>Academy</title>
+            <div class="oe_structure"/>
+            <div class="oe_structure">
+                <div class="container">
+                    <t t-foreach="samples" t-as="sample">
+                        <p>
+                            <a t-attf-href="/riders/{{ slug(sample) }}"> <t t-esc="sample.sample_no"/> </a>
+                        </p>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="sample_detail">
+        <t t-call="website.layout">
+            <title>Academy</title>
+            <div class="oe_structure"/>
+            <div class="oe_structure">
+                <div class="container">
+                    <h3 t-field="sample.sample_no"/>
+                    <p t-field="sample.location"/>
+<!--                    <li><t t-esc="sample.third_party_agent_id.name"/></li>-->
+                    <li><t t-esc="sample.pickup_date"/></li>
+                    <li><t t-esc="sample.state"/></li>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="sample_detail" name="My Sample">
+        <t t-call="portal.portal_layout">
+            <t t-set="o_portal_fullwidth_alert" groups="project.group_project_user">
+                <t t-call="portal.portal_back_in_edit_mode">
+                    <t t-set="backend_url" t-value="'/web#model=sample.sample&amp;id=%s&amp;view_type=form' % (sample.id)"/>
+                </t>
+            </t>
+            <t t-call="portal.portal_record_layout">
+                <t t-set="card_header">
+                    <h5 class="mb-0">
+                        <small class="text-muted">Sample - </small><span t-field="sample.sample_no"/>
+                        <span class="float-right">
+                        </span>
+                    </h5>
+                </t>
+                <t t-set="card_body">
+                    <h3 t-field="sample.sample_no"/>
+                    <p t-field="sample.location"/>
+<!--                    <li><t t-esc="sample.third_party_agent_id.name"/></li>-->
+                    <li><t t-esc="sample.pickup_date"/></li>
+                    <li><t t-esc="sample.state"/></li>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_all_samples" name="Portal My Home : Samples" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-if="count_samples" t-call="portal.portal_docs_entry">
+                <t t-set="title">Samples</t>
+                <t t-set="url" t-value="'/riders/samples/'"/>
+                <t t-set="count" t-value="count_samples"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_home_menu_sample" name="Portal layout : samples menu entries" inherit_id="portal.portal_breadcrumbs" priority="20">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'sample'" t-attf-class="breadcrumb-item #{'active ' if not sample else ''}">
+                <a t-if="sample" t-attf-href="/riders/samples?{{ keep_query() }}">Samples</a>
+                <t t-else="">Samples</t>
+            </li>
+            <li t-if="sample" class="breadcrumb-item active">
+                <t t-esc="sample.sample_no"/>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_riders_samples" name="Samples">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Samples</t>
+            </t>
+            <t t-if="not samples">
+                <p>There are currently no sample available.</p>
+            </t>
+            <t t-if="samples" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Sample Number</th>
+                        <th>Location #</th>
+                        <th class="text-right">Pickup Date</th>
+                        <th class="text-center">Rider</th>
+                        <th class="text-right">State</th>
+                    </tr>
+                </thead>
+                <t t-foreach="samples" t-as="sample">
+                    <tr>
+                        <td><a t-attf-href="/riders/{{ slug(sample) }}"> <t t-esc="sample.sample_no"/> </a></td>
+                        <td class="text-right"><span t-field="sample.location"/></td>
+                        <td class="text-right"><span t-field="sample.pickup_date"/></td>
+<!--                        <td class="text-right"><span t-field="sample.third_party_agent_id.name"/></td>-->
+                        <td class="text-right">
+                            <span class="badge badge-pill badge-secondary"> <span t-field="sample.state"/></span>
+                        </td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

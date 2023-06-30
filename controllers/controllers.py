@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from odoo import http
+from odoo import http, _
 from odoo.http import request
+from odoo.addons.portal.controllers.portal import CustomerPortal
 
 
 class MarkPickup(http.Controller):
@@ -68,3 +69,40 @@ class MobileApiTestTypes(http.Controller):
 
         data = {'status': 200, 'response': loggers_list, 'message': 'Loggers Returned'}
         return data
+
+
+class OdooAcademy(http.Controller):
+
+    @http.route('/riders/samples/', auth='public', website=True)
+    def display_samples(self, sortby=None, **kw):
+        searchbar_sortings = {
+            'date': {'label': _('Sample Date'), 'order': 'pickup_date desc'},
+            'name': {'label': _('Sample'), 'order': 'sample_no'},
+        }
+        if not sortby:
+            sortby = 'date'
+        order = searchbar_sortings[sortby]['order']
+        print(order)
+        samples = http.request.env['sample.sample'].search([('state', 'in', ('pending', 'awaiting_pickup', 'in_progress', 'delivered'))], order=order)
+        return http.request.render('riders_sample_transport.portal_riders_samples', {
+            'samples': samples,
+            'page_name': 'sample',
+            'searchbar_sortings': searchbar_sortings,
+            'sortby': sortby
+        })
+
+    @http.route('/riders/<model("sample.sample"):sample>/', auth='public', website=True)
+    def display_sample_detail(self, sample):
+        return http.request.render('riders_sample_transport.sample_detail', {'sample': sample, 'page_name': 'sample'})
+
+
+class RidersCustomerPortal(CustomerPortal):
+
+    def _prepare_home_portal_values(self):
+        values = super(RidersCustomerPortal, self)._prepare_home_portal_values()
+        count_samples = http.request.env['sample.sample'].search_count([('state', 'in', ('pending', 'awaiting_pickup',
+                                                                                         'in_progress', 'delivered'))])
+        values.update({
+            'count_samples': count_samples,
+        })
+        return values

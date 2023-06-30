@@ -20,7 +20,8 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'mail', 'board', 'ks_dashboard_ninja', 'contacts'],
+    'depends': ['base', 'mail', 'board', 'ks_dashboard_ninja', 'contacts', 'sale', 'website', 'portal'],
+
 
     # always loaded
     'data': [
@@ -30,6 +31,7 @@
         'views/actions.xml',
         'views/menu.xml',
         'views/views.xml',
+        'views/portal_template.xml',
         'views/location_view.xml',
         'views/templates.xml',
         'data/automation.xml',
