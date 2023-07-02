@@ -76,10 +76,10 @@ class OdooAcademy(http.Controller):
 
     @http.route('/riders/samples/', auth='public', website=True)
     def display_samples(self, sortby=None, page=1, **kw):
-        items_per_page = 5  # Number of samples per page
+        items_per_page = 20  # Number of samples per page
         searchbar_sortings = {
-            # 'date': {'label': _('Sample Date'), 'order': 'pickup_date desc'},
             'name': {'label': _('Sample'), 'order': 'sample_no desc'},
+            'date': {'label': _('Sample Date'), 'order': 'pickup_date desc'},
         }
         if not sortby:
             sortby = 'name'
@@ -108,11 +108,9 @@ class OdooAcademy(http.Controller):
 
 class RidersCustomerPortal(CustomerPortal):
 
-    def _prepare_home_portal_values(self):
-        values = super(RidersCustomerPortal, self)._prepare_home_portal_values()
-        count_samples = http.request.env['sample.sample'].search_count([('state', 'in', ('pending', 'awaiting_pickup',
+    def _prepare_home_portal_values(self, counters):
+        values = super(RidersCustomerPortal, self)._prepare_home_portal_values(counters)
+        values['count_samples'] = request.env['sample.sample'].search_count([('state', 'in', ('pending', 'awaiting_pickup',
                                                                                          'in_progress', 'delivered'))])
-        values.update({
-            'count_samples': count_samples,
-        })
+
         return values

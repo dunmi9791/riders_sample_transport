@@ -72,10 +72,11 @@
 
     <template id="portal_all_samples" name="Portal My Home : Samples" inherit_id="portal.portal_my_home">
         <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
-            <t t-if="count_samples" t-call="portal.portal_docs_entry">
+<!--            <t t-if="count_samples" t-call="portal.portal_docs_entry">-->
+            <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Samples</t>
                 <t t-set="url" t-value="'/riders/samples/'"/>
-                <t t-set="count" t-value="count_samples"/>
+                <t t-set="placeholder_count" t-value="'count_samples'"/>
             </t>
         </xpath>
     </template>
