@@ -106,9 +106,9 @@
                 <thead>
                     <tr class="active">
                         <th>Sample Number</th>
-                        <th>Location #</th>
+                        <th class="text-right">Location #</th>
                         <th class="text-right">Pickup Date</th>
-                        <th class="text-center">Rider</th>
+<!--                        <th class="text-center">Rider</th>-->
                         <th class="text-right">State</th>
                     </tr>
                 </thead>
@@ -124,6 +124,28 @@
                     </tr>
                 </t>
             </t>
+            <div class="pagination">
+            <t t-if="current_page > 1">
+                <a href="/riders/samples/?page=1">First</a>
+                <a t-attf-href="/riders/samples/?page={{ current_page - 1 }}">Previous</a>
+            </t>
+
+            <t t-foreach="range(1, total_pages + 1)" t-as="page_number">
+                <t t-if="page_number == current_page">
+                    <span class="current"><t t-esc="page_number"/></span>
+                </t>
+                <t t-else="">
+                    <a t-attf-href="/riders/samples/?page={{ page_number }}"><t t-esc="page_number"/></a>
+                </t>
+            </t>
+
+            <t t-if="current_page &lt; total_pages">
+<!--                <a href="/riders/samples/?page={{ current_page + 1 }}">Next</a>-->
+<!--                <a href="/riders/samples/?page={{ total_pages }}">Last</a>-->
+                 <a t-attf-href="/riders/samples/?page={{ current_page + 1 }}">Next</a>
+                <a t-attf-href="/riders/samples/?page={{ total_pages }}">Last</a>
+            </t>
+        </div>
         </t>
     </template>
 

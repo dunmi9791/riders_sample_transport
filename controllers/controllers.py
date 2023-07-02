@@ -3,6 +3,7 @@
 from odoo import http, _
 from odoo.http import request
 from odoo.addons.portal.controllers.portal import CustomerPortal
+import math
 
 
 class MarkPickup(http.Controller):
@@ -74,21 +75,30 @@ class MobileApiTestTypes(http.Controller):
 class OdooAcademy(http.Controller):
 
     @http.route('/riders/samples/', auth='public', website=True)
-    def display_samples(self, sortby=None, **kw):
+    def display_samples(self, sortby=None, page=1, **kw):
+        items_per_page = 5  # Number of samples per page
         searchbar_sortings = {
-            'date': {'label': _('Sample Date'), 'order': 'pickup_date desc'},
-            'name': {'label': _('Sample'), 'order': 'sample_no'},
+            # 'date': {'label': _('Sample Date'), 'order': 'pickup_date desc'},
+            'name': {'label': _('Sample'), 'order': 'sample_no desc'},
         }
         if not sortby:
-            sortby = 'date'
+            sortby = 'name'
         order = searchbar_sortings[sortby]['order']
         print(order)
-        samples = http.request.env['sample.sample'].search([('state', 'in', ('pending', 'awaiting_pickup', 'in_progress', 'delivered'))], order=order)
+        current_page = int(page)
+        offset = (int(page) - 1) * items_per_page
+        samples = http.request.env['sample.sample'].search([('state', 'in', ('pending', 'awaiting_pickup', 'in_progress', 'delivered'))], order=order, offset=offset, limit=items_per_page)
+        total_samples = http.request.env['sample.sample'].search_count(
+            [('state', 'in', ('pending', 'awaiting_pickup', 'in_progress', 'delivered'))])
+        # Calculate total pages needed
+        total_pages = int(math.ceil(total_samples / items_per_page))
         return http.request.render('riders_sample_transport.portal_riders_samples', {
             'samples': samples,
             'page_name': 'sample',
             'searchbar_sortings': searchbar_sortings,
-            'sortby': sortby
+            'sortby': sortby,
+            'current_page': current_page,
+            'total_pages': total_pages
         })
 
     @http.route('/riders/<model("sample.sample"):sample>/', auth='public', website=True)
