@@ -14,7 +14,7 @@ class Sample(models.Model):
     _name = 'sample.sample'
     _description = 'Sample'
     _rec_name = 'sample_no'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
 
     patient_id = fields.Many2one('patient.rider', string='Patient', required=False, track_visibility='onchange')
     case_number = fields.Char(string='Case Number/Patient', required=False, track_visibility='onchange')
@@ -154,6 +154,14 @@ class Sample(models.Model):
                 rec.days = days
                 rec.hours = hours
                 rec.minutes = minutes
+
+    def unlink(self):
+        # self is a recordset
+        # for sample in self:
+            # if sample.state == 'delivered':
+            #     raise UserError("You can not delete Delivered Samples")
+
+        return super(Sample, self).unlink()
 
     @api.model
     def create(self, vals):
