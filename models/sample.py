@@ -157,9 +157,13 @@ class Sample(models.Model):
 
     def unlink(self):
         # self is a recordset
-        # for sample in self:
-            # if sample.state == 'delivered':
-            #     raise UserError("You can not delete Delivered Samples")
+        for sample in self:
+            if sample.state == 'awaiting_pickup':
+                raise UserError("You can not delete Samples awaiting pickup")
+            if sample.state == 'in_progress':
+                raise UserError("You can not delete Samples in progress")
+            if sample.state == 'delivered':
+                raise UserError("You can not delete Delivered Samples")
 
         return super(Sample, self).unlink()
 
