@@ -92,6 +92,15 @@ class OdooAcademy(http.Controller):
             [('state', 'in', ('pending', 'awaiting_pickup', 'in_progress', 'delivered'))])
         # Calculate total pages needed
         total_pages = int(math.ceil(total_samples / items_per_page))
+        # updated_samples = []
+        # for sample in samples:
+        #     progress_percentage = self.get_progress_percentage(sample.state)
+        #     updated_sample = {
+        #         'sample': sample,
+        #         'progress_percentage': progress_percentage,
+        #     }
+        #     updated_samples.append(updated_sample)
+
         return http.request.render('riders_sample_transport.portal_riders_samples', {
             'samples': samples,
             'page_name': 'sample',
@@ -101,9 +110,25 @@ class OdooAcademy(http.Controller):
             'total_pages': total_pages
         })
 
-    @http.route('/riders/<model("sample.sample"):sample>/', auth='public', website=True)
+
+
+    @http.route('/riders/<model("sample.sample"):sample>/', auth='public', website=True, type='http')
     def display_sample_detail(self, sample):
+        progress_percentage = self.get_progress_percentage(sample.state)
+        sample.progress_percentage = progress_percentage
         return http.request.render('riders_sample_transport.sample_detail', {'sample': sample, 'page_name': 'sample'})
+
+    def get_progress_percentage(self, state):
+        if state == 'awaiting_pickup':
+            return 10
+        elif state == 'in_progress':
+            return 50
+        elif state == 'delivered':
+            return 99
+        # Add more conditions for other states if needed
+        else:
+            return 0
+
 
 
 class RidersCustomerPortal(CustomerPortal):

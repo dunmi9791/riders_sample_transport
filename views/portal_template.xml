@@ -28,7 +28,7 @@
         </t>
     </template>
 
-    <template id="sample_detail">
+    <template id="sample_detail_again">
         <t t-call="website.layout">
             <title>Academy</title>
             <div class="oe_structure"/>
@@ -44,30 +44,158 @@
         </t>
     </template>
 
-    <template id="sample_detail" name="My Sample">
-        <t t-call="portal.portal_layout">
-            <t t-set="o_portal_fullwidth_alert" groups="project.group_project_user">
-                <t t-call="portal.portal_back_in_edit_mode">
-                    <t t-set="backend_url" t-value="'/web#model=sample.sample&amp;id=%s&amp;view_type=form' % (sample.id)"/>
-                </t>
+<!--    <template id="sample_detail" name="My Sample">-->
+<!--        <t t-call="portal.portal_layout">-->
+<!--            <t t-set="o_portal_fullwidth_alert" groups="project.group_project_user">-->
+<!--                <t t-call="portal.portal_back_in_edit_mode">-->
+<!--                    <t t-set="backend_url" t-value="'/web#model=sample.sample&amp;id=%s&amp;view_type=form' % (sample.id)"/>-->
+<!--                </t>-->
+<!--            </t>-->
+<!--            <t t-call="portal.portal_record_layout">-->
+<!--                <t t-set="card_header">-->
+<!--                    <h5 class="mb-0">-->
+<!--                        <small class="text-muted">Sample - </small><span t-field="sample.sample_no"/>-->
+<!--                        <span class="float-right">-->
+<!--                        </span>-->
+<!--                    </h5>-->
+<!--                </t>-->
+<!--                <t t-set="card_body">-->
+<!--                    <h3 t-field="sample.sample_no"/>-->
+<!--                    <p t-field="sample.location"/>-->
+<!--&lt;!&ndash;                    <li><t t-esc="sample.third_party_agent_id.name"/></li>&ndash;&gt;-->
+<!--                    <li><t t-esc="sample.pickup_date"/></li>-->
+<!--                    <li><t t-esc="sample.state"/></li>-->
+<!--                </t>-->
+<!--            </t>-->
+<!--             <div class="chatter">-->
+<!--            <h2>Chatter Messages</h2>-->
+<!--            <t t-foreach="samples" t-as="sample">-->
+<!--                <div class="message" t-if="sample.message_ids">-->
+<!--                    <strong><t t-esc="sample.create_uid.display_name"/></strong>-->
+<!--                    <p><t t-esc="sample.create_date"/></p>-->
+<!--                    <ul>-->
+<!--                        <t t-foreach="sample.message_ids" t-as="message">-->
+<!--                            <li>-->
+<!--                                <t t-esc="message.body"/>-->
+<!--                            </li>-->
+<!--                        </t>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </t>-->
+<!--        </div>-->
+<!--        </t>-->
+<!--    </template>-->
+
+    <template id="sample_detail" name="Sample" inherit_id="portal.portal_sidebar">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <t t-if="page_name == 'sample'">
+           <section style="background-color: #eee;">
+  <div class="container py-5">
+
+
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+              <t t-set="avatar_url" t-value="'/riders_sample_transport/static/src/img/sample_art.png'"/>
+            <img t-att-src="avatar_url" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;"/>
+            <h5 class="my-3"><t t-esc="sample.sample_no"></t></h5>
+            <p class="mb-0"><t t-esc="sample.location.name"></t></p>
+            <div class="d-flex justify-content-center mb-2">
+              <button type="button" class="btn btn-primary">Follow</button>
+              <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Barcode</p>
+              </div>
+              <div class="col-sm-9">
+                  <p class="text-muted mb-0"><t t-esc="sample.barcode"></t></p>
+              </div>
+            </div>
+            <hr/>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Test Type</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><t t-esc="sample.test_type"></t> </p>
+              </div>
+            </div>
+            <hr/>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Case Number</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><t t-esc="sample.case_number"></t> </p>
+              </div>
+            </div>
+            <hr/>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Destination Facility</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><t t-esc="sample.facility_receiving_id.name"></t> </p>
+              </div>
+            </div>
+            <hr/>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Specimen</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0"><t t-esc="sample.specimen_type"></t> </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4"><span class="text-primary font-italic me-1">Sample</span>  Status
+                </p>
+                <p class="mb-1" style="font-size: .77rem;">Delivery Status</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" t-att-style="'width: ' + str(sample.progress_percentage) + '%;'"
+                       aria-valuenow="80"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Schedule Time</p>
+                  <p class="text-muted mb-0"><t t-esc="sample.schedule_pickup_date"></t> </p>
+
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Pickup Time</p>
+                  <p class="text-muted mb-0"><t t-esc="sample.pickup_date"></t> </p>
+
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Delivery Time</p>
+                  <p class="text-muted mb-0"><t t-esc="sample.delivery_date"></t> </p>
+
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Turn Around Time</p>
+                  <p class="text-muted mb-0"><t t-esc="sample.days"></t> Days</p>
+                  <p class="text-muted mb-0"><t t-esc="sample.hours"></t> Hours</p>
+                  <p class="text-muted mb-0"><t t-esc="sample.minutes"></t> Minutes</p>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
             </t>
-            <t t-call="portal.portal_record_layout">
-                <t t-set="card_header">
-                    <h5 class="mb-0">
-                        <small class="text-muted">Sample - </small><span t-field="sample.sample_no"/>
-                        <span class="float-right">
-                        </span>
-                    </h5>
-                </t>
-                <t t-set="card_body">
-                    <h3 t-field="sample.sample_no"/>
-                    <p t-field="sample.location"/>
-<!--                    <li><t t-esc="sample.third_party_agent_id.name"/></li>-->
-                    <li><t t-esc="sample.pickup_date"/></li>
-                    <li><t t-esc="sample.state"/></li>
-                </t>
-            </t>
-        </t>
+        </xpath>
     </template>
 
     <template id="portal_all_samples" name="Portal My Home : Samples" inherit_id="portal.portal_my_home">
@@ -147,6 +275,13 @@
                 <a t-attf-href="/riders/samples/?page={{ total_pages }}">Last</a>
             </t>
         </div>
+
+<!--             <div class="container py-5">-->
+<!--                        <h1>Chatter Feature</h1>-->
+<!--                        <t t-call="portal.message_thread">-->
+<!--                            <t t-set="object" t-value="student" />-->
+<!--                        </t>-->
+<!--                    </div>-->
         </t>
     </template>
 

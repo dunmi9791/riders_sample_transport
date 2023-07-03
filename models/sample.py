@@ -80,6 +80,7 @@ class Sample(models.Model):
         default=lambda self: self.env.user.company_id,
         help='Select the company for this record',
     )
+    progress_percentage = fields.Integer(string='Progress Percentage', required=False)
 
     def get_temperature_logs(self):
         # Assuming you're running this method on a single record.
