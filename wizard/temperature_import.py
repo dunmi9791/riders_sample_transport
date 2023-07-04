@@ -24,6 +24,7 @@ class TemperatureLogImportWizard(models.TransientModel):
 
         # Select the first sheet in the workbook (assuming data is in the first sheet)
         sheet = workbook.active
+        temperature_logger = self.temperature_logger_id
 
         # Iterate through the rows in the sheet, skipping the header row
         for row in sheet.iter_rows(min_row=2):
@@ -31,7 +32,7 @@ class TemperatureLogImportWizard(models.TransientModel):
 
             # Create a new temperature.log record with the parsed data
             self.env['temperature.log'].create({
-                'temperature_logger_id': self.temperature_logger_id.id,
+                'temperature_logger_id': temperature_logger.id,
                 'time': time.value,
                 'temperature': temperature.value,
                 'humidity': humidity.value
