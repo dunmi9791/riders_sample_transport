@@ -289,6 +289,9 @@ class SampleLocation(models.Model):
         string='Company',
         default=lambda self: self.env.user.company_id,
         help='Select the company for this record',
+        store=True,
+        index=True,
     )
+
 
 
