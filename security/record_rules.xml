@@ -3,7 +3,11 @@
      <record id="sample_rule" model="ir.rule">
             <field name="name">Sample multi-company</field>
             <field name="model_id" ref="model_sample_sample"/>
-            <field name="domain_force">[('id', '!=', False)]</field>
+            <field name="domain_force">[
+                '|',
+                ('company_id', '=', False),
+                ('company_id', 'in', user.company_ids.ids),
+            ]</field>
             <field name="groups" eval="[(4, ref('base.group_user'))]"/>
         </record>
      <record id="patient_rule" model="ir.rule">
@@ -19,21 +23,13 @@
      <record id="facility_rule" model="ir.rule">
             <field name="name">Facility multi-company</field>
             <field name="model_id" ref="model_facility_rider"/>
-            <field name="domain_force">[
-                '|',
-                ('company_id', '=', False),
-                ('company_id', 'in', user.company_ids.ids),
-            ]</field>
+            <field name="domain_force">[('id', '!=', False)]</field>
             <field name="groups" eval="[(4, ref('base.group_user'))]"/>
         </record>
      <record id="location_rule" model="ir.rule">
             <field name="name">Location multi-company</field>
             <field name="model_id" ref="model_sample_location"/>
-            <field name="domain_force">[
-                '|',
-                ('company_id', '=', False),
-                ('company_id', 'in', user.company_ids.ids),
-            ]</field>
+            <field name="domain_force">[('id', '!=', False)]</field>
             <field name="groups" eval="[(4, ref('base.group_user'))]"/>
         </record>
     <record id="temperature_logger_rule" model="ir.rule">
