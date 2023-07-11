@@ -174,6 +174,26 @@ class Sample(models.Model):
         result = super(Sample, self).create(vals)
         return result
 
+    @api.depends('sample_temperature_ids.temperature')
+    def _compute_temperature_stats(self):
+        for sample in self:
+            temperatures = sample.sample_temperature_ids.mapped('temperature')
+            if temperatures:
+                sample.avg_temperature = sum(temperatures) / len(temperatures)
+                sample.min_temperature = min(temperatures)
+                sample.max_temperature = max(temperatures)
+                sample.median_temperature = sorted(temperatures)[len(temperatures) // 2]
+            else:
+                sample.avg_temperature = 0.0
+                sample.min_temperature = 0.0
+                sample.max_temperature = 0.0
+                sample.median_temperature = 0.0
+
+    avg_temperature = fields.Float(compute='_compute_temperature_stats', string='Average Temperature')
+    min_temperature = fields.Float(compute='_compute_temperature_stats', string='Lowest Temperature')
+    max_temperature = fields.Float(compute='_compute_temperature_stats', string='Highest Temperature')
+    median_temperature = fields.Float(compute='_compute_temperature_stats', string='Median Temperature')
+
 
 class Patient(models.Model):
     _name = 'patient.rider'

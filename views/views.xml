@@ -41,7 +41,7 @@
                     <button name="mark_delivered" string="Mark Delivered" type="object" attrs="{'invisible': [('state', 'not in', ['in_progress'])]}"/>
                 </group>
                 <notebook>
-                    <page>
+                    <page string="Temperature Logs">
                         <field name="sample_temperature_ids">
                                 <tree create="true" delete="true" editable="bottom">
                                         <field name="time"/>
@@ -51,6 +51,12 @@
                         </field>
                     </page>
                 </notebook>
+                <group>
+                    <field name="avg_temperature"/>
+                    <field name="min_temperature"/>
+                    <field name="max_temperature"/>
+                    <field name="median_temperature"/>
+                </group>
             </sheet>
             <div class="oe_chatter">
                  <field name="message_follower_ids" widget="mail_followers"/>
