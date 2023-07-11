@@ -73,6 +73,7 @@
         <tree string="Samples">
             <field name="sample_no"/>
             <field name="case_number"/>
+            <field name="location"/>
             <field name="facility_sending_id"/>
             <field name="state"/>
             <field name="facility_receiving_id"/>
