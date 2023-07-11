@@ -188,11 +188,29 @@
               </div>
             </div>
           </div>
+            <div class="col-md-6">
+    <div class="card mb-4 mb-md-0">
+      <div class="card-body">
+        <p class="mb-4"><span class="text-primary font-italic me-1">Sample</span> Temperature Logs
+        </p>
+          <p class="mt-4 mb-1" style="font-size: .77rem;">Average Temperature</p>
+                  <p class="text-muted mb-0"><t t-esc="sample.avg_temperature"></t> </p>
+
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Minimum Temperature</p>
+                  <p class="text-muted mb-0"><t t-esc="sample.min_temperature"></t> </p>
+
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Maximum Temperature</p>
+                  <p class="text-muted mb-0"><t t-esc="sample.max_temperature"></t> </p>
+
+      </div>
+    </div>
+   </div>
 
         </div>
       </div>
     </div>
   </div>
+
 
 </section>
                 <div class="o_portal_messages_container mt32">
