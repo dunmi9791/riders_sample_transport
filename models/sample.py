@@ -155,11 +155,26 @@ class Sample(models.Model):
                 rec.hours = hours
                 rec.minutes = minutes
 
+    @api.model
+    def create(self, vals):
+        record = super(Sample, self).create(vals)
+        record.add_user_as_follower()
+        return record
+
+    def write(self, vals):
+        result = super(Sample, self).write(vals)
+        self.add_user_as_follower()
+        return result
+
+    def add_user_as_follower(self):
+        for record in self:
+            user = record.third_party_agent_id
+            if user:
+                record.message_subscribe(partner_ids=[user.id])
+
     def unlink(self):
         # self is a recordset
         for sample in self:
-            if sample.state == 'awaiting_pickup':
-                raise UserError("You can not delete Samples awaiting pickup")
             if sample.state == 'in_progress':
                 raise UserError("You can not delete Samples in progress")
             if sample.state == 'delivered':
