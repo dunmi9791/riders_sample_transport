@@ -7,6 +7,8 @@
         <form string="Sample">
             <header>
                 <button name="get_temperature_logs" string="Get Temperature Logs" type="object" attrs="{'invisible': [('logs_get', '=', True)]}"/>
+                 <button name="cancel" string="Cancel" type="object" attrs="{'invisible': [('state', 'in', ['delivered'])]}"/>
+                    <button name="reset_draft" string="Reset" type="object" attrs="{'invisible': [('state', 'in', ['delivered'])]}"/>
                 <field name="state" widget="statusbar" statusbar_visible="pending,awaiting_pickup,in_progress, delivered"/>
             </header>
             <sheet>

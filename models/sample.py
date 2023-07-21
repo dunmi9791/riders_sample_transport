@@ -26,6 +26,7 @@ class Sample(models.Model):
         ('awaiting_pickup', 'Awaiting Pickup'),
         ('in_progress', 'In Progress'),
         ('delivered', 'Delivered'),
+        ('cancelled', 'Cancelled'),
     ], string='Status', default='pending', required=True, track_visibility='onchange')
     result_status = fields.Selection([
         ('sample_undelivered', 'Pending Sample Delivery'),
@@ -134,6 +135,18 @@ class Sample(models.Model):
             'state': 'delivered',
             'delivery_date': fields.Datetime.now(),
             'result_status': 'awaiting_result',
+        })
+
+    @api.multi
+    def reset_draft(self):
+        self.write({
+            'state': 'pending',
+        })
+
+    @api.multi
+    def cancel(self):
+        self.write({
+            'state': 'cancelled',
         })
 
     @api.depends('delivery_date', 'pickup_date')
